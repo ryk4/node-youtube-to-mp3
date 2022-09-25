@@ -18,6 +18,8 @@ function start() {
         audioBitRate: Number.isInteger(audioBitRate) && allowedBitRates.includes(audioBitRate) ? audioBitRate : 128,
     }
 
+    console.log(settings);
+
     const downloader = new Downloader(settings);
 
     console.log(downloader.getDownloadInfo());
@@ -25,7 +27,7 @@ function start() {
     downloader.getListOfSongsFromPlaylist(url).then(playlist => {
         console.log('Playlist name: ' + playlist.title);
         console.log('Total songs in playlist: ' + playlist.estimatedItemCount);
-        console.log('Total songs to download: ' + limit);
+        console.log('Total songs to download: ' + settings.limit);
 
         playlist.items.forEach(song => {
             downloader.downloadSong(song.id, song.title, playlist.title);
